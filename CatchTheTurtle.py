@@ -57,6 +57,29 @@ def showTurtles():
         hideTurtles()
         random.choice(turtleList).showturtle()
         screen.ontimer(showTurtles,500)
+        
+countdownTurtle=turtle.Turtle()
+def countdown(time):
+    global gameOver
+    countdownTurtle.hideturtle()
+    countdownTurtle.penup()
+    height = turtle.window_height()
+    y = height * 0.42
+
+    countdownTurtle.setpos(0, y)
+    countdownTurtle.color("black")
+    countdownTurtle.clear()
+
+    if time>0:
+        countdownTurtle.clear()
+        countdownTurtle.write(arg=f"Time: {time}", move=False, align="center", font=FONT)
+        screen.ontimer(lambda: countdown(time-1),1000)
+    else:
+        gameOver=True
+        countdownTurtle.clear()
+        hideTurtles()
+        countdownTurtle.write(arg="Game Over!", move=False, align="center", font=FONT)
+
 
 
 
@@ -68,6 +91,7 @@ setupScore()
 setupTurtles()
 hideTurtles()
 showTurtles()
+countdown(10)
 turtle.tracer(1)
 
 
